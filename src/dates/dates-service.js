@@ -1,11 +1,11 @@
 const DatesService = {
     getAllDates(knex) {
-        return knex.select('*').from('savethedate_dates')
+        return knex.select('*').from('dates')
     },
     insertDate(knex, newDate) {
         return knex
             .insert(newDate)
-            .into('savethedate_dates')
+            .into('dates')
             .returng('*')
             .then(rows => {
                 return rows[0]
@@ -13,18 +13,18 @@ const DatesService = {
     },
     getById(knex, id) {
         return knex
-            .from('savethedate_dates')
+            .from('dates')
             .select('*')
             .where('id', id)
             .first()
     },
     deleteDate(knex, id) {
-        return knex('savethedate_dates')
+        return knex('dates')
         .where({ id })
         .delete()
     },
     updateDate(knex, id, newDateFields) {
-        return knex('savethedate_dates')
+        return knex('dates')
         .where({ id })
         .update(newDateFields)
     }

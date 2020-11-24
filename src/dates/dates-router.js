@@ -6,9 +6,9 @@ const DatesService = require('./dates-service')
 const datesRouter = express.Router()
 const jsonParser = express.json()
 
-const serializeDate = date => ({
-    id: date.id,
-    dateDescription: xss(date.dateDescription)
+const serializeDate = dates => ({
+    id: dates.id,
+    dateDescription: xss(dates.dateDescription)
 })
 
 datesRouter
