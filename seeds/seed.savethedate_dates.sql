@@ -1,4 +1,4 @@
-INSERT INTO savethedate_dates (dateDescription)
+INSERT INTO savethedate_dates(dateDescription)
 VALUES
 ('Go to the highest point in the city/town and watch the sunset'),
 ('Go to a park you have never been to before and have a picnic'),
@@ -9,4 +9,4 @@ VALUES
 ('Go-Kart racing'),
 ('Go hiking'),
 ('Go to a wine and paint night'),
-('Take a dance lesson')
+('Take a dance lesson');

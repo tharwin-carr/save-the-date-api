@@ -12,10 +12,10 @@ const serializeDate = date => ({
 })
 
 datesRouter
-.route('/dates')
+.route('/')
 .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    DatesService.getAllDates(knexInstnace)
+    DatesService.getAllDates(knexInstance)
     .then(dates => {
         res.json(dates.map(serializeDate))
     })
