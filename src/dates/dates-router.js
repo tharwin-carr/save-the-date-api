@@ -8,7 +8,7 @@ const jsonParser = express.json()
 
 const serializeDate = dates => ({
     id: dates.id,
-    dateDescription: xss(dates.dateDescription)
+    content: xss(dates.content)
 })
 
 datesRouter
@@ -22,8 +22,8 @@ datesRouter
     .catch(next)
 })
 .post(jsonParser, (req, res, next) => {
-    const { dateDescription } = req.body
-    const newDate = {dateDescription}
+    const { content } = req.body
+    const newDate = {content}
 
     for (const [key, value] of Object.entries(newDate)) {
         if (value == null) {
@@ -33,7 +33,7 @@ datesRouter
         }
     }
 
-    newDate.dateDescription = dateDescription
+    newDate.content = content
     DatesService.insertDate(
         req.app.get('db'),
         newDate
@@ -69,14 +69,14 @@ datesRouter
     res.json(serializeDate(res.date))
 })
 .patch(jsonParser, (req, res, next) => {
-    const { dateDescription } = req.body
-    const dateToUpdate = dateDescription
+    const { content } = req.body
+    const dateToUpdate = content
 
     const numberOfValues = Object.values(dateToUpdate).filter(Boolean).length
     if(numberOfValues === 0) {
         return res.status(400).json({
             error: {
-                message: `Request body must contain dateDescription`
+                message: `Request body must contain content`
             }
         })
     }
