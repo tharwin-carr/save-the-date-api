@@ -18,8 +18,9 @@ app.use(cors())
 
 app.use('/api/dates', datesRouter)
 
-app.get('api/dates', (req, res, next) => {
-  res.json({msg: 'This is CORS-enabled for all origins'})
+app.options('api/dates', cors()) // enable pre-flight request for GET request
+app.get('/api/dates', cors(), (req, res, next) => {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
 /*app.get('/', (req, res) => {
