@@ -6,7 +6,7 @@ const DatesService = {
         return knex
             .insert(newDate)
             .into('savethedate_dates')
-            .returng('*')
+            .returning('*')
             .then(rows => {
                 return rows[0]
             })
