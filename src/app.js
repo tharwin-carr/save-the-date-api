@@ -18,8 +18,8 @@ app.use(cors())
 
 app.use('/api/dates', datesRouter)
 
-app.get('/products/:id', cors(), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for a Single Route'})
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
 /*app.options('*', cors()) // enable pre-flight request for GET request
