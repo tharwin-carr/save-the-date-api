@@ -18,7 +18,12 @@ app.use(cors())
 
 app.use('/api/dates', datesRouter)
 
-app.get('/products/:id', function (req, res, next) {
+let corsOptions = {
+  origin: 'https://save-the-date1.vercel.app',
+  optionsSuccessStatus: 200
+}
+
+app.get('/api/dates/:id', cors(corsOptions), function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
