@@ -18,23 +18,9 @@ app.use(cors())
 
 app.use('/api/dates', datesRouter)
 
-let corsOptions = {
-  origin: 'https://save-the-date1.vercel.app',
-  optionsSuccessStatus: 200
-}
-
-app.get('/api/dates/:id', cors(corsOptions), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})
-
-/*app.options('*', cors()) // enable pre-flight request for GET request
-app.get('*', cors(), (req, res, next) => {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})*/
-
 app.get('/', (req, res) => {
      res.send('Hello, world!')
-  })
+})
 
 app.use(function errorHandler(error, req, res, next) {
   let response
