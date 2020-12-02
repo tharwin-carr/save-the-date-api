@@ -24,5 +24,5 @@ function makeDatesArray() {
 }
 
 module.exports = {
-    makeDatesArray,
+    makeDatesArray
 }
