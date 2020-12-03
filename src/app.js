@@ -17,13 +17,8 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.use('/api/dates', datesRouter)
-app.use('api/favorites', favoritesRouter)
-
-/*app.options('*', cors()) // enable pre-flight request for DELETE request
-app.del('/api/dates/:id', cors(), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})*/
+app.use('/api/dates', datesRouter),
+app.use('/api/favorites', favoritesRouter)
 
 app.get('/', (req, res) => {
      res.send('Hello, world!')

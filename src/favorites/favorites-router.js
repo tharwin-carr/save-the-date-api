@@ -47,25 +47,25 @@ favoritesRouter
 })
 
 favoritesRouter
-.route(':id')
+.route(':favorite_id')
 .all((req, res, next) => {
     FavoritesService.getFavoriteById(
         req.app.get('db'),
-        req.params.id
+        req.params.favorite_id
     )
-    .then(date => {
-        if(!date) {
+    .then(favorite => {
+        if(!favorite) {
             return res.status(404).json({
-                error: { message: `Date doesn't exist`}
+                error: { message: `Favorite doesn't exist`}
             })
         }
-        res.date = date
+        res.favorite = favorite
         next()
     })
     .catch(next)
 })
 .get((req, res, next) => {
-    res.json(serializeFavorite(res.date))
+    res.json(serializeFavorite(res.favorite))
 })
 .patch(jsonParser, (req, res, next) => {
     const { content } = req.body

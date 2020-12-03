@@ -1,6 +1,8 @@
 const FavoritesService = {
     getAllFavorites(knex) {
-        return knex.select('*').from('savethedate_favorites')
+        return knex
+            .select('*')
+            .from('savethedate_favorites')            
     },
     insertFavorite(knex, newFavorite) {
         return knex
