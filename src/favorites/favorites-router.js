@@ -7,8 +7,8 @@ const favoritesRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeFavorite = favorite => ({
-    id: favorite.id,
-    content: xss(favorite.content) //sanitize content
+    favorite_id: favorite.id,
+    favorite_content: xss(favorite.content)//sanitize content
 })
 
 favoritesRouter
@@ -22,26 +22,25 @@ favoritesRouter
     .catch(next)
 })
 .post(jsonParser, (req, res, next) => {
-    const { content } = req.body
-    const favorite = { content }
+    const favoriteId = req.body.favorite_id
 
-    for (const [key, value] of Object.entries(favorie)) {
+    for (const [key, value] of Object.entries(favorite)) {
         if (value == null) {
             return res.status(400).json({
-                error: { message: `Missing '${key} in request body`}
+                error: { message: `Missing '${key}' in request body`}
             })
         }
     }
 
     FavoritesService.insertFavorite(
         req.app.get('db'),
-        favorite
+        favoriteId
     )
-    .then(date => {
+    .then(results => {
         res
             .status(201)
-            .location(path.posix.join(req.originalUrl, `/${date.id}`))
-            .json(serializeFavorite(date))
+            .location(path.posix.join(req.originalUrl, `/${favorite.id}`))
+            .json(serializeFavorite(results))
     })
     .catch(next)
 })

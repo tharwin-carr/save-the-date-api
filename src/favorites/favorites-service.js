@@ -1,8 +1,10 @@
 const FavoritesService = {
-    getAllFavorites(knex) {
-        return knex
-            .select('*')
-            .from('savethedate_favorites')            
+    getFavorites(db) {
+        return db
+            .from('savethedate_favorites')
+            .select('date_id')
+            .where('savethedate_dates, ')
+
     },
     insertFavorite(knex, newFavorite) {
         return knex
