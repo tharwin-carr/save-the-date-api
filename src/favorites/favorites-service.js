@@ -1,37 +1,36 @@
 const FavoritesService = {
-    getFavorites(db) {
-        return db
-            .from('savethedate_favorites')
-            .select('date_id')
-            .where('savethedate_dates, ')
-
-    },
-    insertFavorite(knex, newFavorite) {
+    getFavorites(knex) {
         return knex
-            .insert(newFavorite)
+        .select('*')
+        .from('savethedate_favorites')
+        .join('savethedate_dates', 'savethedate_dates.id', '=', 'savethedate_favorites.favorite_id')
+    },
+    insertFavorite(knex, favoriteId, ) {
+        return knex
+            .insert({ favorite_id: favoriteId })
             .into('savethedate_favorites')
             .returning('*')
             .then(rows => {
                 return rows[0]
             })
     },
-    getFavoriteById(knex, id) {
+    getFavoriteById(knex, favoriteId) {
         return knex
-            .from('savethedate_dates')
+            .from('savethedate_favorites')
             .select('*')
-            .where('id', id)
+            .where('favorite_id', favoriteId)
             .first()
     },
-    deleteFavorite(knex, id) {
+    deleteFavorite(knex, favoriteId) {
         return knex('savethedate_favorites')
-        .where({ id })
+        .where('favorite_id', favoriteId)
         .delete()
     },
     updateFavorite(knex, id, newFavoriteFields) {
         return knex('savethedate_favorites')
         .where({id })
         .update(newFavoriteFields)
-    }
+    },
 }
 
 module.exports = FavoritesService

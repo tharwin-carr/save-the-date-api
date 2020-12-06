@@ -15,7 +15,7 @@ favoritesRouter
 .route('/')
 .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    FavoritesService.getAllFavorites(knexInstance)
+    FavoritesService.getFavorites(knexInstance)
     .then(favorites => {
         res.json(favorites.map(serializeFavorite))
     })
@@ -23,34 +23,27 @@ favoritesRouter
 })
 .post(jsonParser, (req, res, next) => {
     const favoriteId = req.body.favorite_id
-
-    for (const [key, value] of Object.entries(favorite)) {
-        if (value == null) {
-            return res.status(400).json({
-                error: { message: `Missing '${key}' in request body`}
-            })
-        }
-    }
-
+    
     FavoritesService.insertFavorite(
         req.app.get('db'),
-        favoriteId
+        favoriteId,
     )
+
     .then(results => {
         res
             .status(201)
-            .location(path.posix.join(req.originalUrl, `/${favorite.id}`))
+            .location(path.posix.join(req.originalUrl, `/${results.id}`))
             .json(serializeFavorite(results))
     })
     .catch(next)
 })
 
 favoritesRouter
-.route(':favorite_id')
+.route('/:id')
 .all((req, res, next) => {
     FavoritesService.getFavoriteById(
         req.app.get('db'),
-        req.params.favorite_id
+        req.params.id
     )
     .then(favorite => {
         if(!favorite) {
@@ -89,9 +82,10 @@ favoritesRouter
     .catch(next)
 })
 .delete((req, res, next) => {
+    favoriteId = req.params.id
     FavoritesService.deleteFavorite(
         req.app.get('db'),
-        req.params.id
+        favoriteId
     )
     .then((numRowsAffected) => {
         res.status(204).end()

@@ -1,3 +1,3 @@
-CREATE TABLE savethedate_favorites {
-    date_id INTEGER REFERENCES savethedate_dates(id) ON DELETE CASCADE NOT NULL
+CREATE TABLE savethedate_favorites (
+    favorite_id INTEGER REFERENCES savethedate_dates(id) ON DELETE CASCADE NOT NULL
 );

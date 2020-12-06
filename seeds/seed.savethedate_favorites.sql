@@ -1,4 +1,4 @@
-INSERT INTO savethedate_favorites (date_id)
+INSERT INTO savethedate_favorites (favorite_id)
 VALUES
     ('1'),
     ('8'),
