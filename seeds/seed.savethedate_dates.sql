@@ -5,7 +5,7 @@ VALUES
 ('Dinner and a movie'),
 ('Look up a random recipe and cook dinner together'),
 ('Go bowling'),
-('Play minauture gold'),
+('Play minauture golf'),
 ('Go Kart racing'),
 ('Go hiking'),
 ('Go to a wine and paint night'),
