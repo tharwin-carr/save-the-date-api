@@ -64,4 +64,4 @@ an example of each is provided</p>
 <a href='https://save-the-date-wheat.vercel.app/'>Live version of app</a>
 <a href='https://github.com/tharwin-carr/save_the_date'>Client Repo</a>
 
-<p>Tech used: Express, Node, Postgresql,knex,Cha</p>
+<p>Tech used: Express, Node, Postgresql, Knex, Chai</p>
